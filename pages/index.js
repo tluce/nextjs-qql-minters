@@ -3,10 +3,11 @@ import { useQuery } from "@apollo/client";
 import GET_MINTED_NFTS from "../subgraphQuery";
 import NftBox from "../components/NftBox";
 import { useRef } from "react";
-import { MAX_TOKENS } from "../constants";
+import { MIN_TOKEN_ID, MAX_TOKEN_ID } from "../constants";
+import { Loading } from "@web3uikit/core";
 
 export default function Home() {
-    let lastTokenIdFetched = useRef(MAX_TOKENS + 1);
+    let lastTokenIdFetched = useRef(MAX_TOKEN_ID + 1);
     let nfts = useRef([]);
 
     const { loading, error, data, fetchMore } = useQuery(GET_MINTED_NFTS, {
