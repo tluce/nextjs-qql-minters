@@ -30,7 +30,7 @@ export default function Home() {
                     return prev;
                 } else {
                     return {
-                        itemMinteds: fetchMoreResult.itemMinteds,
+                        mintedItems: fetchMoreResult.mintedItems,
                     };
                 }
             },
@@ -42,8 +42,8 @@ export default function Home() {
     }
     if (data) {
         fetchingMore = false;
-        lastTokenIdFetched.current = data.itemMinteds.slice(-1)[0].tokenId;
-        nfts.current.push(...data.itemMinteds);
+        lastTokenIdFetched.current = data.mintedItems.slice(-1)[0].tokenId;
+        nfts.current.push(...data.mintedItems);
     }
 
     return (
