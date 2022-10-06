@@ -4,7 +4,19 @@ import Head from "next/head";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const apolloClient = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+        typePolicies: {
+            Query: {
+                fields: {
+                    itemMinteds: {
+                        merge(existing = [], incoming) {
+                            return [...existing, ...incoming];
+                        },
+                    },
+                },
+            },
+        },
+    }),
     uri: process.env.NEXT_PUBLIC_SUBGRAPH_URL,
 });
 

@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const GET_MINTED_NFTS = gql`
-    query mintedNfts($lastTokenId: BigInt) {
+    query MintedNfts($lastTokenId: BigInt) {
         itemMinteds(
             first: 12
             orderBy: tokenId
