@@ -30,14 +30,20 @@ export default function NftBox({ minterAddress, tokenId }) {
     const [minter, setMinter] = useState("...");
 
     useEffect(() => {
-        const lastAddrLookupDate = parseInt(
-            window.localStorage.getItem(LOCAL_STORAGE_LOOKUP_DATE)
-        );
+        const lastAddrLookupDate = window.localStorage.getItem(LOCAL_STORAGE_LOOKUP_DATE)
+            ? parseInt(window.localStorage.getItem(LOCAL_STORAGE_LOOKUP_DATE))
+            : null;
         const ensName = window.localStorage.getItem(minterAddress);
 
-        if (ensName != null && Date.now() - lastAddrLookupDate < ENS_CACHE_DURATION) {
+        if (
+            ensName != null &&
+            lastAddrLookupDate &&
+            Date.now() - lastAddrLookupDate < ENS_CACHE_DURATION
+        ) {
+            // use cached data
             setMinter(ensName.length > 0 ? ensName : formatAddress(minterAddress));
         } else {
+            // fetch data
             lookupAddress(minterAddress)
                 .then((ensName) => {
                     window.localStorage.setItem(LOCAL_STORAGE_LOOKUP_DATE, Date.now().toString());
