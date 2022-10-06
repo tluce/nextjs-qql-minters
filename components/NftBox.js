@@ -62,6 +62,7 @@ export default function NftBox({ minterAddress, tokenId }) {
             title={`#${tokenId}`}
             description={`Minter: ${minter}`}
             onClick={() => openLink(tokenId)}
+            className="grid place-items-center"
         >
             <Image unoptimized={true} src={getImageUrl(tokenId)} width="240" height="300" />
         </Card>
