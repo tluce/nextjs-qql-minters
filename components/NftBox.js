@@ -1,8 +1,13 @@
 import { Card } from "@web3uikit/core";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { lookupAddress } from "../utils/ens";
-import { NFT_IMAGE_URL, NFT_COLLECTION_URL } from "../constants";
+import {
+    NFT_IMAGE_URL,
+    NFT_COLLECTION_URL,
+    ENS_CACHE_DURATION,
+    LOCAL_STORAGE_LOOKUP_DATE,
+} from "../constants";
 
 const getImageUrl = (tokenId) => {
     const tokenStringLength = 6;
@@ -24,18 +29,33 @@ const openLink = (tokenId) => {
 export default function NftBox({ minterAddress, tokenId }) {
     const [minter, setMinter] = useState("...");
 
-    lookupAddress(minterAddress)
-        .then((ensName) => {
-            if (ensName) {
-                setMinter(ensName);
-            } else {
-                setMinter(formatAddress(minterAddress));
-            }
-        })
-        .catch((error) => {
-            setMinter(formatAddress(minterAddress));
-            console.error(error);
-        });
+    useEffect(() => {
+        const lastAddrLookupDate = parseInt(
+            window.localStorage.getItem(LOCAL_STORAGE_LOOKUP_DATE)
+        );
+        const ensName = window.localStorage.getItem(minterAddress);
+
+        if (ensName != null && Date.now() - lastAddrLookupDate < ENS_CACHE_DURATION) {
+            setMinter(ensName.length > 0 ? ensName : formatAddress(minterAddress));
+        } else {
+            lookupAddress(minterAddress)
+                .then((ensName) => {
+                    window.localStorage.setItem(LOCAL_STORAGE_LOOKUP_DATE, Date.now().toString());
+
+                    if (ensName) {
+                        window.localStorage.setItem(minterAddress, ensName);
+                        setMinter(ensName);
+                    } else {
+                        window.localStorage.setItem(minterAddress, "");
+                        setMinter(formatAddress(minterAddress));
+                    }
+                })
+                .catch((error) => {
+                    setMinter(formatAddress(minterAddress));
+                    console.error(error);
+                });
+        }
+    }, []);
 
     return (
         <Card
