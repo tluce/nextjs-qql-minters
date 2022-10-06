@@ -47,9 +47,9 @@ export default function Home() {
     }
 
     return (
-        <div className="mx-10 grid grid-cols-4 gap-4 place-items-center">
+        <div className="mx-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 place-items-center">
             {nfts.current.length == 0 ? (
-                <div className="col-span-4">
+                <div className="sm:col-span-2 lg:col-span-3 xl:col-span-4">
                     <Loading size={40} spinnerColor="#2E7DAF" />
                 </div>
             ) : (
@@ -62,11 +62,11 @@ export default function Home() {
                     );
                 })
             )}
-            <div className="col-span-4 pb-10">
+            <div className="sm:col-span-2 lg:col-span-3 xl:col-span-4 pb-10">
                 <div
                     className={
                         loading && lastTokenIdFetched.current < MAX_TOKEN_ID
-                            ? "visible"
+                            ? "visible grid place-items-center"
                             : "invisible"
                     }
                 >
