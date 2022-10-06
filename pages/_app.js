@@ -8,7 +8,7 @@ const apolloClient = new ApolloClient({
         typePolicies: {
             Query: {
                 fields: {
-                    itemMinteds: {
+                    mintedItems: {
                         merge(existing = [], incoming) {
                             return [...existing, ...incoming];
                         },
