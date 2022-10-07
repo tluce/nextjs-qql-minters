@@ -4,6 +4,9 @@ This project shows the Ethereum address or ENS name of the people who minted [QQ
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+<img width="1295" alt="screenshot" src="https://user-images.githubusercontent.com/34001240/194543322-287d4273-f6b5-47bc-bf4e-5270bca93790.png">
+
+
 ## Requirements
 
 To monitor the minting events, you need the URL of a Subgraph indexer that can fulfill the query defined in `subgraphQuery.js`.
