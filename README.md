@@ -1,31 +1,33 @@
+## Next.js QQL Minters
+
+This project shows the Ethereum address or ENS name of the people who minted [QQL](https://archipelago.art/collections/qql), a generative NFT collection by [Tyler Hobbs](https://twitter.com/tylerxhobbs) and [Dandelion Wist Mané](https://twitter.com/dandelion_wist).
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Requirements
+
+To monitor the minting events, you need the URL of a Subgraph indexer that can fulfill the query defined in `subgraphQuery.js`.
+A development Subgraph URL is provided when running this project: [https://github.com/tluce/graph-qql-minters](https://github.com/tluce/graph-qql-minters).
+
+Set your Subgraph URL and an Ethereum RPC node in a `.env.local` file.
+```sh
+NEXT_PUBLIC_SUBGRAPH_URL=<Subgraph URL>
+NEXT_PUBLIC_MAINNET_RPC_URL=https://ethereum-mainnet-rpc.allthatnode.com
+```
 
 ## Getting Started
 
 First, run the development server:
 
-```bash
+```sh
 npm run dev
-# or
+```
+or
+```sh
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
